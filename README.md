@@ -68,8 +68,8 @@ mv /path/to/smpl/models/basicmodel_m_lbs_10_207_0_v1.0.0.pkl model/smplx_utils/s
 ## Preparing dataset
 We provide the preprocessed data of the 10 subjects used in the paper.
 - Our preprocessing followed [IMavatar](https://github.com/zhengyuf/IMavatar/tree/main/preprocess#preprocess) and replaced the *Segmentation* with [RobustVideoMatting](https://github.com/PeterL1n/RobustVideoMatting).
-- Pre-trained checkpoints are provided together with the data.
-- [Google Drive](https://drive.google.com/drive/folders/1YPEG1IYgkZWTlibRZfMjhXFMw58JJVeq?usp=sharing) or [Baidu Disk](https://pan.baidu.com/s/12ycpotyE4KUZ-HvhpCcVxw?pwd=bkfh)
+- ~~Pre-trained checkpoints are provided together with the data.~~
+  - Please find the data from https://github.com/Zielon/INSTA. We'll update the checkpoint link soon.
 
 <img src="assets/SplattingAvatar-dataset.jpg" width="800"/> 
 
