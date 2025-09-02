@@ -29,6 +29,14 @@ class GaussianBase(nn.Module):
         self.max_sh_degree = sh_degree
         self.setup_functions()
 
+    @property
+    def get_features_dc(self):
+        return self._features_dc
+    
+    @property
+    def get_features_rest(self):
+        return self._features_rest
+    
     def setup_functions(self):
         def build_covariance_from_scaling_rotation(scaling, scaling_modifier, rotation):
             L = build_scaling_rotation(scaling_modifier * scaling, rotation)
@@ -84,7 +92,7 @@ class GaussianBase(nn.Module):
         elif not isinstance(background, torch.Tensor):
             background = torch.tensor(background, dtype=torch.float32, device='cuda')
 
-        out = render(viewpoint_cam, self, pipe, background, scaling_modifer)
+        out = render(viewpoint_cam, self, pipe, background, scaling_modifer, separate_sh=True)
 
         if hasattr(viewpoint_cam, 'original_image'):
             if hasattr(viewpoint_cam, 'gt_alpha_mask'):

@@ -71,16 +71,28 @@ if __name__ == "__main__":
     # load images
     image_dir = outdir / "images"
     os.makedirs(image_dir, exist_ok=True)
-
-    # print("Write images to", image_dir)
-    # cap = cv2.VideoCapture(str(dirpath / f"{args.subject}.mp4"))
-    # frame_cnt = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    # for i in tqdm.trange(frame_cnt):
-    #     img_path = f"{image_dir}/image_{i:04d}.png"
-    #     ok, frame = cap.read()
-    #     if not ok: break
-    #     frame = cv2.undistort(frame, K, dist_coeffs)
-    #     cv2.imwrite(img_path, frame)
+    
+    
+    print("Write images to", image_dir)
+    cap = cv2.VideoCapture(str(dirpath / f"{args.subject}.mp4"))
+    frame_cnt = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    #check if images exist
+    if os.path.exists(image_dir):
+        #check if image count is correct
+        if len(os.listdir(image_dir))==frame_cnt:
+            print("image already exists, skip")
+            # exit(0)
+        else:
+            print("current image count is zero or incorrect, delete and recreate")
+            for f in os.listdir(image_dir):
+                os.remove(os.path.join(image_dir, f))
+            # recreate
+            for i in tqdm.trange(frame_cnt):
+                img_path = f"{image_dir}/image_{i:04d}.png"
+                ok, frame = cap.read()
+                if not ok: break
+                frame = cv2.undistort(frame, K, dist_coeffs)
+                cv2.imwrite(img_path, frame)
 
     # load masks
     mask_dir = outdir / "masks"

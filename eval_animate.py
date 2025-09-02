@@ -16,9 +16,10 @@ from tqdm import tqdm
 class AnimateDataset(torch.utils.data.Dataset):
     def __init__(self, pose_sequence, betas):
         smpl_params = dict(np.load(pose_sequence))
+        #dict key modified for compatibility with camhmr/change_file.py
 
-        thetas = smpl_params["poses"][..., :72]
-        transl = smpl_params["trans"] - smpl_params["trans"][0:1]
+        thetas = smpl_params["thetas"][..., :72]
+        transl = smpl_params["transl"] - smpl_params["transl"][0:1]
         transl += (0, 0.15, 5)
 
         self.betas = betas
